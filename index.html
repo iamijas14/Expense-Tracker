@@ -97,7 +97,6 @@
         const textAmount = inputAmount.value; //read amount
 
         const textDesc = inputDesc.value; //read description
-
         const expense = parseInt(textAmount) // convert to number
 
         expenseItem.desc = textDesc;
@@ -122,12 +121,10 @@
         // <div>${data2Text}</div> `
 
         // returns a array of string 
-        const allExpenseHTML = allExpense.map((item) => {
-           return createItemList(expenseItem);
-        }); 
+        const allExpenseHTML = allExpense.map((item) => createItemList(item));
+         
 
-        const joinExpense = allExpenseHTML.join('') // converts array of strings to STRING
-        console.log(joinExpense);
+        const joinExpense = allExpenseHTML.join("") // converts array of strings to STRING
 
         expenseTableElement.innerHTML= joinExpense;
 }
