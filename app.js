@@ -1,80 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
-    <link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-			crossorigin="anonymous"
-		/>
-        <script
-			defer
-			src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
-			integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
-			crossorigin="anonymous"
-		></script>
-</head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">Xpers</span>
-        <span class="navbar-brand mb-0 h1" id="totalDisplay"></span>
-    </nav>
-
-    <div class="container-fluid bg-light" style="min-height: 100vh">
-        <div class="container">
-            <div class="jumbotron mt-4">
-                <div class="input-group mb-3">
-                    <input
-                        type="text"
-                        id="inputDesc"
-                        class="form-control"
-                        placeholder="Amount spent"
-                        aria-label="Amount spent"
-                        aria-describedby="spent in rupee"
-                    />
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="spent in rupee">@</span>
-                    </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="spent at">₹</span>
-                    </div>
-                    <input
-                        type="text"
-                        id="inputAmount"
-                        class="form-control"
-                        placeholder="spent On"
-                        aria-label="spent On"
-                        aria-describedby="spent at"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="btnAdd">Add</button>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <ul class="list-group" id = "expenseTable">
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- <h1 id="totalDisplay"></h1> -->
-    <!-- <input id="inputDesc" type="text" placeholder="Item"> -->
-    <!-- <input id="inputAmount" type="text" placeholder="Amount"> -->
-    <!-- <button id="btnAdd">+</button> -->
-    <!-- <div id = "expenseTable"></div> -->
-
-
-   <script>
-   const headingElement = document.querySelector("#totalDisplay")
+const headingElement = document.querySelector("#totalDisplay")
     const element = document.querySelector("#btnAdd")
     const inputAmount = document.querySelector("#inputAmount")
     const inputDesc = document.querySelector("#inputDesc")
@@ -117,8 +41,6 @@
 
         renderList(allExpense)
 }
-
-        element.addEventListener( "click" ,addExpenseToTotal)
 
          const getDate = (momento) => {
          return momento.toLocaleDateString('en-US', {
@@ -174,9 +96,4 @@
                     </li>`
 }
 
-
-    
-
-   </script>
-</body>
-</html>
+element.addEventListener( "click" ,addExpenseToTotal)
