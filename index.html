@@ -120,13 +120,7 @@
         // <div>${data1Text}</div>
         // <div>${data2Text}</div> `
 
-        // returns a array of string 
-        const allExpenseHTML = allExpense.map((item) => createItemList(item));
-         
-
-        const joinExpense = allExpenseHTML.join("") // converts array of strings to STRING
-
-        expenseTableElement.innerHTML= joinExpense;
+        renderList(allExpense)
 }
 
          const getDate = (momento) => {
@@ -137,8 +131,33 @@
         })
 }
 
-const createItemList = ( {desc,amount,moment} ) => {
-    return `<li class="list-group-item d-flex justify-content-between">
+        const deleteItem = (dataValue) => {
+            // const updatedArray = [];
+            // console.log("value of deleted itme",dataValue)
+            // for(let i=0; i < allExpense.length; i++){
+            //     if(allExpense[i].moment.valueOf() !== dataValue){
+            //         updatedArray.push(allExpense[i]);
+            //     }
+            // }
+
+            // const updatedArray = allExpense.filter(item => {
+            //     if(item.moment.valueOf() !== dataValue){
+            //         return item;
+            //     }
+            // })
+
+            const updatedArray = allExpense.filter(item => item.moment.valueOf() !== dataValue)
+            renderList(updatedArray);;
+    }
+
+    const renderList = (arrayList) => {
+            const allExpenseHTML = arrayList.map((item) => createItemList(item)); // returns a array of string 
+            const joinExpense = allExpenseHTML.join("") // converts array of strings to STRING.
+            expenseTableElement.innerHTML= joinExpense;
+    }
+
+            const createItemList = ( {desc,amount,moment} ) => {
+                return `<li class="list-group-item d-flex justify-content-between">
                         <div class="d-flex flex-column">
                             ${desc}
                             <small class="text-muted">${getDate(moment)}</small>
@@ -147,7 +166,11 @@ const createItemList = ( {desc,amount,moment} ) => {
                             <span class="px-5">
                                 ${amount}
                             </span>
-                            <button type="button" class="btn btn-outline-danger btn-sm">
+                            <button 
+                                type="button"   
+                                class="btn btn-outline-danger btn-sm"   
+                                onclick="deleteItem(${moment.valueOf()})"
+                                >
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
