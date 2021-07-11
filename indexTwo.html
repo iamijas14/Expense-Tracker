@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>practice-session-1</practice-session-1></title>
+    <title>practice-session-1</title>
     <link
 			rel="stylesheet"
 			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -113,8 +113,11 @@
         }
 
         const deleteItem = (dateValue) => {
-           const updatedArray = allExpense.filter((item) =>item.moment.valueOf() !== dateValue )
+           const updatedArray = allExpense.filter((item) =>item.moment.valueOf() !== dateValue)
            renderList(updatedArray)
+
+        //    totalValue = totalValue + updatedArray(expenseObj.amount)
+        //    totalElement.textContent = `Total:${totalValue}`
         }
 
         const resetInput = () => {
