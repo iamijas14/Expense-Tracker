@@ -74,15 +74,15 @@
 
 
    <script>
-   const headingElement = document.querySelector("#totalDisplay")
+    const headingElement = document.querySelector("#totalDisplay")
     const element = document.querySelector("#btnAdd")
     const inputAmount = document.querySelector("#inputAmount")
     const inputDesc = document.querySelector("#inputDesc")
     const expenseTableElement = document.querySelector("#expenseTable")
 
-    let totalExpense = 0;
+    let totalExpense = 0; 
     
-    headingElement.textContent = totalExpense;
+    headingElement.textContent = totalExpense; //initial total value = 0
 
     const allExpense = [] //empty array to store data using object
 
@@ -90,9 +90,10 @@
         const expenseItem = {} // empty object to store items
 
         const textAmount = inputAmount.value; //read amount
+        const expense = parseInt(textAmount) // convert to number
 
         const textDesc = inputDesc.value; //read description
-        const expense = parseInt(textAmount) // convert to number
+        
 
         expenseItem.desc = textDesc;
         expenseItem.amount = textAmount;
@@ -174,9 +175,7 @@
                     </li>`
 }
 
+</script>
 
-    
-
-   </script>
 </body>
 </html>
