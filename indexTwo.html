@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice-session-1</practice-session-1></title>
+    <link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+        <script
+			defer
+			src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+			integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+			crossorigin="anonymous"
+		></script>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Xpers</span>
+        <span class="navbar-brand mb-0 h1" id="totalDisplay"></span>
+    </nav>
+
+    <div class="container-fluid bg-light" style="min-height: 100vh">
+        <div class="container">
+            <div class="jumbotron mt-4">
+                <div class="input-group mb-3">
+                    <input
+                        type="text"
+                        id="inputAmount"
+                        class="form-control"
+                        placeholder="Amount spent"
+                        aria-label="Amount spent"
+                        aria-describedby="spent in rupee"
+                    />
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="spent in rupee">₹</span>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="spent at">@</span>
+                    </div>
+                    <input
+                        type="text"
+                        id="inputDesc"
+                        class="form-control"
+                        placeholder="spent On"
+                        aria-label="spent On"
+                        aria-describedby="spent at"
+                    />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="btnAdd">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <ul class="list-group" id = "expenseTable">
+                </ul>
+            </div>
+        </div>
+    </div> 
+    
+    <script>
+        const btnElement = document.querySelector("#btnAdd")
+        const amountElement = document.querySelector("#inputAmount")
+        const descElement = document.querySelector("#inputDesc")
+        const totalElement = document.querySelector("#totalDisplay")
+        const displayElement = document.querySelector("#expenseTable")
+
+        let totalValue = 0;
+        totalElement.textContent = totalValue
+
+        const allExpense =[];
+
+        function addClickHandler(){
+            const expenseObj = {};
+
+            const textAmountElement = amountElement.value
+            const textAmount = parseInt(textAmountElement)
+            const textDesc = descElement.value
+
+            totalValue = totalValue + textAmount;
+            totalElement.textContent = `Total:${totalValue}`
+
+            expenseObj.desc = textDesc;
+            expenseObj.amount = textAmount;
+            expenseObj.moment = new Date();
+
+            allExpense.push(expenseObj);
+            
+            renderList(allExpense);
+            resetInput();
+            
+}
+
+        const renderList = (arrItem) => {
+            const displayItems = arrItem.map((item) => createItemList(item))
+            const displayHTML = displayItems.join("")
+            displayElement.innerHTML = displayHTML
+        }
+
+        const showDate = (momento) => {
+           return momento.toLocaleDateString("en-us",{
+                                    month:"long",
+                                    day:"numeric",
+                                    year:"numeric",
+                                })
+        }
+
+        const deleteItem = (dateValue) => {
+           const updatedArray = allExpense.filter((item) =>item.moment.valueOf() !== dateValue )
+           renderList(updatedArray)
+        }
+
+        const resetInput = () => {
+             amountElement.value= ""
+             descElement.value=""
+        }
+
+        const createItemList = ({desc,amount,moment}) => {
+            return `<li class="list-group-item d-flex justify-content-between">
+							<div class="d-flex flex-column">
+								${desc}
+								<small class="text-muted">${showDate(moment)}</small>
+							</div>
+							<div>
+								<span class="px-5">
+									${amount}
+								</span>
+								<button 
+                                type="button" 
+                                class="btn btn-outline-danger btn-sm"
+                                onclick = "deleteItem(${moment.valueOf()})"
+                                >
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</div>
+						</li>`
+        }
+
+
+
+
+
+
+
+
+
+
+        btnElement.addEventListener("click", addClickHandler,false)
+    </script>
+</body>
+</html>
